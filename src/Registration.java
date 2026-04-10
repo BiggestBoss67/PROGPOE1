@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegistrationLogin {
+public class Registration{
     // Data storage for the registered user
     private String registeredUsername;
     private String registeredPassword;
@@ -76,7 +76,7 @@ public class RegistrationLogin {
 
     // --- ENTRY POINT: RUNNABLE MAIN METHOD ---
     public static void main(String[] args) {
-        RegistrationLogin app = new RegistrationLogin();
+        Registration app = new Registration();
         Scanner sc = new Scanner(System.in);
 
         System.out.println("--- USER REGISTRATION ---");
