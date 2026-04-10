@@ -12,6 +12,6 @@ void main() {
         num = input.nextInt();
         sum += num;
         count++;
-    }
+    }YGFDYTG7DTD7TD78TD78TD8
 System.out.println("Sum " + sum);
 }
