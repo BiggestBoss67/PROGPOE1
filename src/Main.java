@@ -11,7 +11,7 @@ void main() {
         System.out.println("Enter a number");
         num = input.nextInt();
         sum += num;
-        count++;
+        count++;gbggggggg
     }YGFDYTG7DTD7TD78TD78TD8
 System.out.println("Sum " + sum);
 }
