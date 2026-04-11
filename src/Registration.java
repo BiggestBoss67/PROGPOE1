@@ -11,7 +11,26 @@ public class Registration{
 
     // 1. Check Username: Contains (_) and is <= 5 characters
     public boolean checkUserName(String username) {
-        return username.contains("_") && username.length() <= 5;
+        Scanner sc = new Scanner (System.in);
+        boolean valid = false;
+        System.out.print("Create a 5 character username, your username should contain ONE underscore (_)");
+
+        while (!valid) {
+
+            System.out.print("Enter your username: ");
+            username = sc.nextLine();
+
+            int length = username.length();
+
+            if (length== 5 && username.contains("_")) {
+                System.out.print("Username successfully captured! \n");
+                valid =true;
+            }else{
+                System.out.print("Username is not correctly formatted, please ensure that your username contains an underscore" +
+                        " and is no more than 5 characters long.");
+            }
+        }
+        return true;
     }
 
     // 2. Check Password Complexity
