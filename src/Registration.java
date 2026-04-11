@@ -35,19 +35,39 @@ public class Registration{
 
     // 2. Check Password Complexity
     public boolean checkPasswordComplexity(String password) {
-        boolean hasUpper = false;
-        boolean hasDigit = false;
-        boolean hasSpecial = false;
+        Scanner sc = new Scanner(System.in);
+        boolean valid = false;
+        System.out.print("Create a password, it should be 8 characters long, it should contain ONE digit, ONE uppercase and ONE special character");
 
-        if (password.length() < 8) return false;
+        while (!valid) {
+            System.out.print("Enter your password");
+            password = sc.nextLine();
 
-        for (char c : password.toCharArray()) {
-            if (Character.isUpperCase(c)) hasUpper = true;
-            if (Character.isDigit(c)) hasDigit = true;
-            if (!Character.isLetterOrDigit(c)) hasSpecial = true;
+            boolean hasUpper = false;
+            boolean hasDigit = false;
+            boolean hasSpecial = false;
+
+            if (password.length() == 8) {
+                for (char c : password.toCharArray()) {
+                    if (Character.isUpperCase(c)) hasUpper = true;
+                    if (Character.isDigit(c)) hasDigit = true;
+                    if (!Character.isLetterOrDigit(c)) hasSpecial = true;
+                }
+            }
+            if (hasUpper && hasDigit && hasSpecial) {
+                System.out.print("Password successfully captured!");
+                valid = true;
+            } else {
+                System.out.print("Password is not correctly formatted, please ensure that your password contains 8 characters," +
+                        " ONE special character, ONE digit and ONE uppercase letter");
+            }
+
         }
-        return hasUpper && hasDigit && hasSpecial;
+        return true;
     }
+
+
+
 
     // 3. Check Cell Phone Number (Regex)
     public boolean checkCellPhoneNumber(String cellNumber) {
@@ -114,7 +134,7 @@ public class Registration{
         String regStatus = app.registerUser(user, pass, cell, fName, lName);
         System.out.println("\n" + regStatus);
 
-        // Only proceed to login if registration was successful
+        // Only proceed to log in if registration was successful
         if (regStatus.contains("successfully captured")) {
             System.out.println("\n--- USER LOGIN ---");
             System.out.print("Enter Username: ");
