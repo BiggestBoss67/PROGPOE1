@@ -2,150 +2,110 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Registration{
-    // Data storage for the registered user
+public class Registration {
     private String registeredUsername;
     private String registeredPassword;
     private String firstName;
     private String lastName;
 
-    // 1. Check Username: Contains (_) and is <= 5 characters
-    public boolean checkUserName(String username) {
-        Scanner sc = new Scanner (System.in);
+    public String registerUser(String fName, String lName) {
+        this.firstName = fName;
+        this.lastName = lName;
+        checkUserName();
+        checkPasswordComplexity();
+        checkCellPhoneNumber();
+        return "--- REGISTRATION SUCCESSFUL! :) ";
+    }
+
+    public boolean checkUserName() {
+        Scanner sc = new Scanner(System.in);
         boolean valid = false;
-        System.out.print("Create a 5 character username, your username should contain ONE underscore (_)");
+
+        System.out.println("\n Create a username and ensure that it contains ONE underscore and is no more than FIVE characters long.");
 
         while (!valid) {
+            System.out.print("\n Enter your username: ");
+            String username = sc.nextLine();
 
-            System.out.print("Enter your username: ");
-            username = sc.nextLine();
-
-            int length = username.length();
-
-            if (length== 5 && username.contains("_")) {
-                System.out.print("Username successfully captured! \n");
-                valid =true;
-            }else{
-                System.out.print("Username is not correctly formatted, please ensure that your username contains an underscore" +
-                        " and is no more than 5 characters long.");
+            if (username.length() == 5 && username.contains("_")) {
+                this.registeredUsername = username;
+                System.out.println("Username successfully captured!\n");
+                valid = true;
+            } else {
+                System.out.println("Username is not correctly formatted, please ensure that your username contains ONE underscore and is no more than FIVE characters long.\n");
             }
         }
         return true;
     }
 
-    // 2. Check Password Complexity
-    public boolean checkPasswordComplexity(String password) {
+    public boolean checkPasswordComplexity() {
         Scanner sc = new Scanner(System.in);
         boolean valid = false;
-        System.out.print("Create a password, it should be 8 characters long, it should contain ONE digit, ONE uppercase and ONE special character");
+
+        System.out.print("Create a password that is at least EIGHT characters long. ensure that it contains ONE capital letter, ONE digit and ONE special character. \n");
 
         while (!valid) {
-            System.out.print("Enter your password");
-            password = sc.nextLine();
+            System.out.print("\n Enter your password: ");
+            String password = sc.nextLine();
 
             boolean hasUpper = false;
             boolean hasDigit = false;
             boolean hasSpecial = false;
 
-            if (password.length() == 8) {
+            if (password.length() >= 8) {
                 for (char c : password.toCharArray()) {
                     if (Character.isUpperCase(c)) hasUpper = true;
                     if (Character.isDigit(c)) hasDigit = true;
                     if (!Character.isLetterOrDigit(c)) hasSpecial = true;
                 }
             }
+
             if (hasUpper && hasDigit && hasSpecial) {
-                System.out.print("Password successfully captured!");
+                this.registeredPassword = password;
+                System.out.print("Password successfully captured!\n");
                 valid = true;
             } else {
-                System.out.print("Password is not correctly formatted, please ensure that your password contains 8 characters," +
-                        " ONE special character, ONE digit and ONE uppercase letter");
+                System.out.print("Password is not correctly formatted, please ensure that your password contains at least EIGHT characters, ONE capital letter, ONE digit and ONE special character.\n");
             }
-
         }
         return true;
     }
 
-
-
-
-    // 3. Check Cell Phone Number (Regex)
-    public boolean checkCellPhoneNumber(String cellNumber) {
-        // Starts with +27 followed by 9 digits (Total 11 characters)
-        String regex = "^\\+27[0 -9]{9}$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(cellNumber);
-        return matcher.matches();
-    }
-
-    // 4. Register User Messaging
-    public String registerUser(String username, String password, String cell, String fName, String lName) {
-        if (!checkUserName(username)) {
-            return "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.";
-        }
-        if (!checkPasswordComplexity(password)) {
-            return "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.";
-        }
-        if (!checkCellPhoneNumber(cell)) {
-            return "Cell number is incorrectly formatted or does not contain an international code; please correct the number and try again.";
-        }
-
-        // Store data if all checks pass
-        this.registeredUsername = username;
-        this.registeredPassword = password;
-        this.firstName = fName;
-        this.lastName = lName;
-
-        return "Username successfully captured.\nPassword successfully captured.\nCell number successfully captured.";
-    }
-
-    // 5. Login User Verification
-    public boolean loginUser(String loginUsername, String loginPassword) {
-        return loginUsername.equals(this.registeredUsername) && loginPassword.equals(this.registeredPassword);
-    }
-
-    // 6. Return Login Status Messaging
-    public String returnLoginStatus(boolean isLoggedIn) {
-        if (isLoggedIn) {
-            return "Welcome " + firstName + ", " + lastName + " it is great to see you again.";
-        } else {
-            return "Username or password incorrect, please try again.";
-        }
-    }
-
-    // --- ENTRY POINT: RUNNABLE MAIN METHOD ---
-    public static void main(String[] args) {
-        Registration app = new Registration();
+    public boolean checkCellPhoneNumber() {
         Scanner sc = new Scanner(System.in);
+        boolean valid = false;
+        String regex = "^\\+27[0-9]{9}$";
+        Pattern pattern = Pattern.compile(regex);
 
-        System.out.println("--- USER REGISTRATION ---");
-        System.out.print("Enter First Name: ");
-        String fName = sc.nextLine();
-        System.out.print("Enter Last Name: ");
-        String lName = sc.nextLine();
-        System.out.print("Enter Username (max 5 chars, must have _): ");
-        String user = sc.nextLine();
-        System.out.print("Enter Password (8+ chars, Upper, Number, Special): ");
-        String pass = sc.nextLine();
-        System.out.print("Enter Cell (+27xxxxxxx): ");
-        String cell = sc.nextLine();
+        while (!valid) {
+            System.out.print("\n Enter your SA cell phone number, begin with (+27): ");
+            String cellNumber = sc.nextLine();
 
-        // Register and show message
-        String regStatus = app.registerUser(user, pass, cell, fName, lName);
-        System.out.println("\n" + regStatus);
+            Matcher matcher = pattern.matcher(cellNumber);
 
-        // Only proceed to log in if registration was successful
-        if (regStatus.contains("successfully captured")) {
-            System.out.println("\n--- USER LOGIN ---");
-            System.out.print("Enter Username: ");
-            String logUser = sc.nextLine();
-            System.out.print("Enter Password: ");
-            String logPass = sc.nextLine();
-
-            boolean isSuccess = app.loginUser(logUser, logPass);
-            System.out.println(app.returnLoginStatus(isSuccess));
+            if (matcher.matches()) {
+                System.out.println("Cellphone number successfully added! \n");
+                valid = true;
+            } else {
+                System.out.println("Cellphone number incorrectly formatted or does not contain international code. Try again: \n");
+            }
         }
+        return true;
+    }
 
-        sc.close();
+    public String getRegisteredUsername() {
+        return registeredUsername;
+    }
+
+    public String getRegisteredPassword() {
+        return registeredPassword;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 }
