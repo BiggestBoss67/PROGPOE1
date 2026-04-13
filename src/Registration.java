@@ -36,9 +36,7 @@ public class Registration {
 
         if (isUsernameValid && isPasswordValid && isCellValid) {
 
-            return "--- REGISTRATION SUCCESSFUL! :)" +
-                   "\nUsername: " + registeredUsername +
-                    "\nPassword: "  + registeredPassword;
+            return "--- REGISTRATION SUCCESSFUL! :)";
         // if the boolean flags return false, the following will be printed instead
         } else {
             return "--- REGISTRATION FAILED!---" +

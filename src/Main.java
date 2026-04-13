@@ -1,12 +1,14 @@
 void main() {
     /** Author: Eberechukwu Osondo
      * Student number: ST10536068
+     *
      * Reference list:
      * Youtu.be. (2026). Available at: https://youtu.be/RAthlOQUMkc?si=pjr3rLybAJ2C9nn8 [Accessed 11 Apr. 2026].
      * in (2022). How to user input with condition in java? [online] Stack Overflow. Available at: https://share.google/T4ky3aDGBoAy3wvYd [Accessed 11 Apr. 2026].
      * Tutorialspoint.com. (2019). Program to check valid mobile number using Java regular expressions. [online] Available at: https://www.tutorialspoint.com/article/program-to-check-valid-mobile-number-using-java-regular-expressions [Accessed 12 Apr. 2026].
      * www.w3schools.com. (n.d.). Java Inner Class (Nested Class). [online] Available at: https://www.w3schools.com/java/java_inner_classes.asp.
-     *Description:
+     *
+     * Description:
      * Our class contains a scanner because we want to separate our concerns.
      * this class is the main class, and is the bridge between the login and registration class
      * this class handles communication between the user as well

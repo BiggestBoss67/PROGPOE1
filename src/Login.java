@@ -3,10 +3,7 @@ import java.util.Scanner;
 /** Author: Eberechukwu Osondo
  * Student number: ST10536068
  * Description:
- * our class does not contain a scanner because we want to separate our concerns.
- * this class will only contain the logic behind the login part of the program,
- * so that later we can also test this class.
- * you cant test a class that requires user input **/
+ * this class will contains the logic behind the login part of the program **/
 
 public class Login {
 //this class contains no private variables, all our variables are declared within methods.
