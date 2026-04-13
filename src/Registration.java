@@ -2,10 +2,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 // imported the above java tools to implement our logic for our cellphone number method//
 
-/**our class does not contain a scanner because we want to separate our concerns.
-//this class will only contain the logic behind the registration part of the program,
- so that later we can also test this class.
-//you cant test a class that requires user input **/
+/** Author: Eberechukwu Osondo
+ * Student number: ST10536068
+ * Description:
+ * our class does not contain a scanner because we want to separate our concerns.
+*this class will only contain the logic behind the registration part of the program,
+ *so that later we can also test this class.
+*you cant test a class that requires user input **/
 
 public class Registration {
 
