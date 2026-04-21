@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Registration{
+public class Registration {
     // Data storage for the registered user
     private String registeredUsername;
     private String registeredPassword;
@@ -11,11 +11,40 @@ public class Registration{
 
     // 1. Check Username: Contains (_) and is <= 5 characters
     public boolean checkUserName(String username) {
-        return username.contains("_") && username.length() <= 5;
+        Scanner sc = new Scanner(System.in);
+        boolean valid = false;
+
+        System.out.print("Create a 5 character username, your username should contain an underscore");
+
+        while (!valid) {
+            System.out.print("Enter your Username: ");
+            username = sc.nextLine();
+
+            int length = username.length();
+
+            if (length == 5 && username.contains("_")) {
+                System.out.print("Username successfully captured! \n");
+                valid = true;
+            } else {
+                System.out.print("Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.");
+                ;
+            }
+        }
+        return true;
     }
 
     // 2. Check Password Complexity
     public boolean checkPasswordComplexity(String password) {
+        Scanner sc = new Scanner(System.in);
+        boolean valid = false;
+
+        System.out.print("Create a Password, should be 8 characters long, contain ONE uppercase letter, ONE digit and ONE special character)");
+
+        while (!valid) {
+            System.out.print("Enter your password: ");
+            password = sc.nextLine();
+
+        }
         boolean hasUpper = false;
         boolean hasDigit = false;
         boolean hasSpecial = false;
@@ -81,32 +110,25 @@ public class Registration{
 
         System.out.println("--- USER REGISTRATION ---");
         System.out.print("Enter First Name: ");
-        String fName = sc.nextLine();
+        String firstName = sc.nextLine();
         System.out.print("Enter Last Name: ");
-        String lName = sc.nextLine();
-        System.out.print("Enter Username (max 5 chars, must have _): ");
-        String user = sc.nextLine();
-        System.out.print("Enter Password (8+ chars, Upper, Number, Special): ");
-        String pass = sc.nextLine();
-        System.out.print("Enter Cell (+27xxxxxxx): ");
-        String cell = sc.nextLine();
+        String lastName = sc.nextLine();
+        System.out.print("Enter Username (your username should contain 5 characters and an underscore '_' ): ");
+        String username = sc.nextLine();
+
+
+        System.out.print("Enter Password (your password should be 8 characters long, contain ONE uppercase letter, ONE digit and ONE special character): ");
+        String password = sc.nextLine();
+        System.out.print("Enter SA phone number (begin with '+27' ): ");
+        String cellNumber = sc.nextLine();
 
         // Register and show message
-        String regStatus = app.registerUser(user, pass, cell, fName, lName);
+        String regStatus = app.registerUser(username, password, cellNumber, firstName, lastName);
         System.out.println("\n" + regStatus);
 
         // Only proceed to login if registration was successful
         if (regStatus.contains("successfully captured")) {
-            System.out.println("\n--- USER LOGIN ---");
-            System.out.print("Enter Username: ");
-            String logUser = sc.nextLine();
-            System.out.print("Enter Password: ");
-            String logPass = sc.nextLine();
-
-            boolean isSuccess = app.loginUser(logUser, logPass);
-            System.out.println(app.returnLoginStatus(isSuccess));
+            System.out.println("\n--");
         }
-
-        sc.close();
     }
 }
