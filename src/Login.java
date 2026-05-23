@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Login {
 //this class contains no private variables, all our variables are declared within methods.
 
-    public void startLoginProcess(String storedUsername, String storedPassword,String fName, String lName){
+    public String startLoginProcess(String storedUsername, String storedPassword,String fName, String lName){
         Scanner sc = new Scanner(System.in);
         // our variable starts off false until given a reason to be true. it's a flag
         boolean isLoggedIn = false;
@@ -33,6 +33,7 @@ public class Login {
                 System.out.println("Please try again.");
             }
         }
+        return "" ;
     }
     //this method uses stored data received from the user through the registration class
     public boolean loginUser(String storedUsername, String storedPassword, String enteredUsername, String enteredPassword) {
