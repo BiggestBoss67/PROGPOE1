@@ -64,12 +64,12 @@ void main() {
 
     if (regStatus.contains("SUCCESSFUL")) {
         String loginStatus = login.startLoginProcess(
-        reg.getRegisteredUsername(),
-        reg.getRegisteredPassword(),
-        reg.getFirstName(),
-        reg.getLastName()
-    );
-        if (loginStatus.contains("SUCCESSFUL")){
+                reg.getRegisteredUsername(),
+                reg.getRegisteredPassword(),
+                reg.getFirstName(),
+                reg.getLastName()
+        );
+        if (loginStatus.contains("great")){
             sms.chatApp();
         }else System.out.println("Unsuccessful login.");
     }

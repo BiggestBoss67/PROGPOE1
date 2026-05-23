@@ -33,7 +33,7 @@ public class Login {
                 System.out.println("Please try again.");
             }
         }
-        return "" ;
+        return " Welcome " + fName + " " + lName + ", it is great to see you again.";
     }
     //this method uses stored data received from the user through the registration class
     public boolean loginUser(String storedUsername, String storedPassword, String enteredUsername, String enteredPassword) {
@@ -49,5 +49,4 @@ public class Login {
             return " Username or password incorrect, please try again.";
         }
     }
-}// there is no direct link between the login and registration class,
-// call both classes inside the main class and then manually create that bridge.
+}
