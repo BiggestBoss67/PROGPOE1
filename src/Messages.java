@@ -12,6 +12,8 @@
  * this class is the main class, and is the bridge between the login and registration class
  * this class handles communication between the user as well
  * this class cant be tested as it requires user input.**/
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,7 +27,7 @@ public class Messages {
     private String messageHash;
 
 
-// this method is what will generate the random 10 digit number
+    // this method is what will generate the random 10 digit number
     public Messages() {
         Random rand = new Random();
         // Generates a random 10-digit number string
@@ -33,11 +35,11 @@ public class Messages {
         //integers are converted into a string
         this.messageId = String.valueOf(id);
     }
-//this method ensures that the message ID does not exceed 10 chars
+    //this method ensures that the message ID does not exceed 10 chars
     public boolean checkMessageID() {
         return this.messageId != null && this.messageId.length() <= 10;
     }
-//this method verifies the validity of the cellphone number
+    //this method verifies the validity of the cellphone number
     public Boolean checkRecipientCell(String cellNumber) {
         //we used regular expressions and the matches tool to ensure that the cellphone number matches the format of a South African number
         String regex = "^\\+27[0-9]{9}$";
@@ -68,7 +70,7 @@ public class Messages {
 
         return this.messageHash;
     }
-// this method asks the user to choose their next moves after typing their message
+    // this method asks the user to choose their next moves after typing their message
     public String SentMessage(int choice) {
         if (choice == 1) {
             numMessages++;
@@ -93,6 +95,23 @@ public class Messages {
     }
 
     public void storeMessage() {
-//coming soon
+        // Safely handle special characters in the text for JSON formatting
+        String safeText = (this.messageText != null) ? this.messageText.replace("\"", "\\\"") : "";
+
+        // Constructing the JSON string manually to keep the code dependency-free
+        String jsonOutput = "{\n" +
+                "  \"messageId\": \"" + this.messageId + "\",\n" +
+                "  \"recipientCell\": \"" + this.recipientCell + "\",\n" +
+                "  \"messageText\": \" " + safeText + "\",\n" +
+                "  \"messageHash\": \"" + this.messageHash + "\"\n" +
+                "}";
+
+        // Writing the JSON block directly to a local file
+        try (FileWriter file = new FileWriter("messages.json", true)) {
+            file.write(jsonOutput + "\n");
+            System.out.println("What would you like to do now?.");
+        } catch (IOException e) {
+            System.out.println("An error occurred while saving the message: " + e.getMessage());
+        }
     }
 }
