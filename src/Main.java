@@ -119,7 +119,7 @@ void main() {
 
                             if (textInput.length() > 250) {
                                 int x = textInput.length() - 250;
-                                System.out.println("message exceeds 250 characters by" + x + ", Please reduce the size");
+                                System.out.println("message exceeds 250 characters by " + x + ", Please reduce the size");
                             } else {
                                sentMessages++;
                                System.out.println("Message ready to send");
@@ -138,7 +138,6 @@ void main() {
                                 String actionReceipt = activeMsg.SentMessage(messagePath);
 
                                 if (messagePath== 1) {
-                                    System.out.println("Message successfully sent");
                                     System.out.println(actionReceipt); // "Message successfully sent"
 
 
