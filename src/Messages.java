@@ -23,7 +23,7 @@ public class Messages {
     private String recipientCell;
     private String messageText;
     private String messageHash;
-    int messageNumber;
+
 
 // this method is what will generate the random 10 digit number
     public Messages() {
@@ -54,7 +54,7 @@ public class Messages {
     //a method to build the message hash by joining parts of the message and its number to create a code.
     public String createMessageHash(String rawMessage, int msgNum) {
         this.messageText = rawMessage;
-        this.messageNumber = msgNum;
+
 
         String firstTwoDigits = this.messageId.substring(0, 2);
 
