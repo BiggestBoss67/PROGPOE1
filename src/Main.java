@@ -62,6 +62,7 @@ void main() {
     // If the registration was successful, grab the official username, password,
     // and name from the registration records and start the login process using that information.
 
+// 4. CALL THE LOGIN PROCESS
     if (regStatus.contains("SUCCESSFUL")) {
         String loginStatus = login.startLoginProcess(
                 reg.getRegisteredUsername(),
@@ -69,9 +70,109 @@ void main() {
                 reg.getFirstName(),
                 reg.getLastName()
         );
-        if (loginStatus.contains("great")){
-            sms.chatApp();
-        }else System.out.println("Unsuccessful login.");
-    }
 
+        if (loginStatus.contains("great")) {
+
+            System.out.println("Welcome to QuickChat.");
+
+
+            System.out.print("How many messages do you wish to enter? ");
+            int totalMessages = sc.nextInt();
+            sc.nextLine(); // Clear the scanner buffer
+
+            int sentMessages = 0;
+            boolean chatting = true;
+
+            while (chatting) {
+
+                System.out.println("\nPlease choose an option from the menu:");
+                System.out.println("1) Send Messages");
+                System.out.println("2) Show recently sent messages");
+                System.out.println("3) Quit");
+                System.out.print("Enter either 1, 2 or 3: ");
+
+                int choice = sc.nextInt();
+                sc.nextLine(); // Clear the scanner buffer
+
+                if (choice == 1) {
+
+                    if (sentMessages >= totalMessages) {
+                        System.out.println("You have reached your limit of " + totalMessages + " messages.");
+                    } else {
+                        System.out.println("\n--- New Message ---");
+
+
+                        System.out.print("Enter recipient cell number (Max 10 digits): ");
+                        String cellInput = sc.nextLine();
+
+                        Messages activeMsg = new Messages();
+                        Boolean cellStatus = activeMsg.checkRecipientCell(cellInput);
+                        cellStatus = sms.checkRecipientCell(cellInput);
+
+                        if (cellStatus.equals(false)) {
+                            System.out.println("Enter Recipient cell phone number. Begin with (+27): ");
+
+                        } else {
+
+                            System.out.print("Enter your message: ");
+                            String textInput = sc.nextLine();
+
+                            if (textInput.length() > 250) {
+                                System.out.println("Please enter a message of less than 250 characters.");
+                            } else {
+                               sentMessages++;
+
+                                activeMsg.createMessageHash(textInput, sentMessages);
+
+
+                                System.out.println("\n Select what you would like to do next: ");
+                                System.out.println("1 - Send Message");
+                                System.out.println("0 - Disregard Message");
+                                System.out.println("2 - Store Message to send later");
+                                System.out.print("Select 0, 1 or 2 ");
+                                int messagePath = sc.nextInt();
+                                sc.nextLine(); // Clear scanner buffer
+
+                                String actionReceipt = activeMsg.SentMessage(messagePath);
+
+                                if (messagePath== 1) {
+                                    System.out.println("Message sent");
+                                    System.out.println(actionReceipt); // "Message successfully sent"
+
+
+                                    System.out.println("\n=== MESSAGE DETAILS ===");
+                                    System.out.println(activeMsg.printMessages());
+                                } else if (messagePath== 0) {
+                                    System.out.println(actionReceipt); // "Press 0 to delete the message"
+                                } else if (messagePath == 2) {
+                                    System.out.println(actionReceipt); // "Message successfully stored"
+                                    activeMsg.storeMessage();
+                                } else {
+                                    System.out.println("Invalid structural message path selected.");
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (choice == 2) {
+
+                    System.out.println("Coming Soon.");
+                }
+                else if (choice == 3) {
+                    System.out.println("Quitting application...");
+                    chatting = false;
+                }
+                else {
+                    System.out.println("Invalid option. Please select 1, 2, or 3.");
+                }
+            }
+
+            Messages summaryCheck = new Messages();
+            System.out.println("\n==========================================");
+            System.out.println("Total successful messages processed across session: " + summaryCheck.returnTotalMessages());
+            System.out.println("==========================================");
+        } else {
+            System.out.println("Unsuccessful login.");
+        }
+    }
 }
