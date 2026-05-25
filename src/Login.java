@@ -3,7 +3,7 @@ import java.util.Scanner;
 /** Author: Eberechukwu Osondo
  * Student number: ST10536068
  * Description:
- * this class will contains the logic behind the login part of the program **/
+ * this class will contain the logic behind the login part of the program **/
 
 public class Login {
 //this class contains no private variables, all our variables are declared within methods.
@@ -44,9 +44,9 @@ public class Login {
 
     public String returnLoginStatus(boolean isLoggedIn, String fName, String lName) {
         if (isLoggedIn) {
-            return " Welcome " + fName + " " + lName + ", it is great to see you again.";
+            return "\nWelcome " + fName + " " + lName + ", it is great to see you again.\n";
         }else {
-            return " Username or password incorrect, please try again.";
+            return "Username or password incorrect, please try again.";
         }
     }
 }

@@ -1,4 +1,4 @@
-import java.util.Scanner;
+
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,7 +32,7 @@ public class Messages {
 
         if (matcher.matches()) {
             return true;
-        } else {;
+        } else {
             return false;
         }
     }

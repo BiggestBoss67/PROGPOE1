@@ -17,7 +17,7 @@ void main() {
     // 1. Created instances of my logic classes
     Registration reg = new Registration();
     Login login = new Login();
-    Messages sms = new Messages();
+
 
     Scanner sc = new Scanner(System.in);
 
@@ -34,7 +34,7 @@ void main() {
     boolean isUserValid = false;
     while (!isUserValid) {
         System.out.println("\nCreate a username. Please ensure that your username contains ONE underscore and is no more than FIVE characters long.");
-        System.out.println("\nEnter your username: ");
+        System.out.println("Enter your username: ");
         username = sc.nextLine();
         isUserValid = reg.checkUserName(username);
     }
@@ -43,7 +43,7 @@ void main() {
     boolean isPassValid = false;
     while (!isPassValid) {
         System.out.println("\nCreate a password. Please ensure that your password contains at least EIGHT characters, ONE capital letter, ONE digit and ONE special character.  ");
-        System.out.println("\nEnter your password: ");
+        System.out.println("Enter your password: ");
         password = sc.nextLine();
         isPassValid = reg.checkPasswordComplexity(password);
     }
@@ -73,10 +73,10 @@ void main() {
 
         if (loginStatus.contains("great")) {
 
-            System.out.println("Welcome to QuickChat.");
+            System.out.println("\nWelcome to QuickChat.");
 
 
-            System.out.print("How many messages do you wish to enter? ");
+            System.out.print("\nHow many messages do you wish to enter? ");
             int totalMessages = sc.nextInt();
             sc.nextLine(); // Clear the scanner buffer
 
@@ -102,15 +102,15 @@ void main() {
                         System.out.println("\n--- New Message ---");
 
 
-                        System.out.print("Enter recipient cell number (Max 10 digits): ");
+                        System.out.print("Enter recipient cell number. Begin with (+27): ");
                         String cellInput = sc.nextLine();
 
                         Messages activeMsg = new Messages();
                         Boolean cellStatus = activeMsg.checkRecipientCell(cellInput);
-                        cellStatus = sms.checkRecipientCell(cellInput);
+
 
                         if (cellStatus.equals(false)) {
-                            System.out.println("Enter Recipient cell phone number. Begin with (+27): ");
+                            System.out.println("Cellphone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.  ");
 
                         } else {
 
@@ -118,9 +118,11 @@ void main() {
                             String textInput = sc.nextLine();
 
                             if (textInput.length() > 250) {
-                                System.out.println("Please enter a message of less than 250 characters.");
+                                int x = textInput.length() - 250;
+                                System.out.println("message exceeds 250 characters by" + x + ", Please reduce the size");
                             } else {
                                sentMessages++;
+                               System.out.println("Message ready to send");
 
                                 activeMsg.createMessageHash(textInput, sentMessages);
 
@@ -136,7 +138,7 @@ void main() {
                                 String actionReceipt = activeMsg.SentMessage(messagePath);
 
                                 if (messagePath== 1) {
-                                    System.out.println("Message sent");
+                                    System.out.println("Message successfully sent");
                                     System.out.println(actionReceipt); // "Message successfully sent"
 
 
@@ -148,7 +150,7 @@ void main() {
                                     System.out.println(actionReceipt); // "Message successfully stored"
                                     activeMsg.storeMessage();
                                 } else {
-                                    System.out.println("Invalid structural message path selected.");
+                                    System.out.println("Invalid selection.");
                                 }
                             }
                         }
