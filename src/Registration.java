@@ -6,9 +6,9 @@ import java.util.regex.Pattern;
  * Student number: ST10536068
  * Description:
  * our class does not contain a scanner because we want to separate our concerns.
-*this class will only contain the logic behind the registration part of the program,
- *so that later we can also test this class.
-*you cant test a class that requires user input **/
+ * this class will only contain the logic behind the registration part of the program,
+ * so that later we can also test this class.
+ * you cant test a class that requires user input **/
 
 public class Registration {
 
@@ -37,8 +37,8 @@ public class Registration {
         if (isUsernameValid && isPasswordValid && isCellValid) {
 
             return "--- REGISTRATION SUCCESSFUL! :)";
-        // if the boolean flags return false, the following will be printed instead
         } else {
+            // if the boolean flags return false, the following will be printed instead
             return "--- REGISTRATION FAILED!---" +
                     "\n Please ensure all fields are correct." +
                     "\n Please ensure that your username contains ONE underscore and is no more than FIVE characters long" +
@@ -65,7 +65,7 @@ public class Registration {
     // Logic for Password...checks if password contains 8+ characters, one digit,special character and uppercase letter.
 
     public boolean checkPasswordComplexity(String password) {
-// Pessimistic (to assume the condition has  not been met until there's proof that it has.), that is the reason we initialized the variables to be false.
+// Pessimistic (to assume the condition has not been met until there's proof that it has.), that is the reason we initialized the variables to be false.
 // they act as a checklist. only true once it has been identified otherwise it is false
         boolean hasUpper = false;
         boolean hasDigit = false;

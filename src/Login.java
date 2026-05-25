@@ -3,18 +3,16 @@ import java.util.Scanner;
 /** Author: Eberechukwu Osondo
  * Student number: ST10536068
  * Description:
- * this class will contains the logic behind the login part of the program **/
-
+ * this class will contain the logic behind the login part of the program **/
 public class Login {
 //this class contains no private variables, all our variables are declared within methods.
 
-    public void startLoginProcess(String storedUsername, String storedPassword,String fName, String lName){
+    public void startLoginProcess(String storedUsername, String storedPassword, String fName, String lName){
         Scanner sc = new Scanner(System.in);
         // our variable starts off false until given a reason to be true. it's a flag
         boolean isLoggedIn = false;
 
         //this class will run continuously unless the user enters the same data they registered with
-
         while(!isLoggedIn) {
 
             System.out.println("\n--- LOGIN TO YOUR ACCOUNT ---");
@@ -25,7 +23,7 @@ public class Login {
             System.out.println("Enter password: ");
             String enteredPassword = sc.nextLine();
 
-            isLoggedIn = loginUser(storedUsername, storedPassword,enteredUsername, enteredPassword);
+            isLoggedIn = loginUser(storedUsername, storedPassword, enteredUsername, enteredPassword);
             String message = returnLoginStatus(isLoggedIn, fName, lName);
             System.out.println(message);
 
@@ -34,19 +32,19 @@ public class Login {
             }
         }
     }
+
     //this method uses stored data received from the user through the registration class
     public boolean loginUser(String storedUsername, String storedPassword, String enteredUsername, String enteredPassword) {
-
         return enteredUsername.equals(storedUsername) && enteredPassword.equals(storedPassword);
     }
 
-
     public String returnLoginStatus(boolean isLoggedIn, String fName, String lName) {
         if (isLoggedIn) {
-            return " Welcome " + fName + " " + lName + ", it is great to see you again.";
-        }else {
-            return " Username or password incorrect, please try again.";
+            return "\nWelcome " + fName + " " + lName + ", it is great to see you again.\n";
+        } else {
+            return "Username or password incorrect, please try again.";
         }
     }
-}// there is no direct link between the login and registration class,
+}
+// there is no direct link between the login and registration class,
 // call both classes inside the main class and then manually create that bridge.
